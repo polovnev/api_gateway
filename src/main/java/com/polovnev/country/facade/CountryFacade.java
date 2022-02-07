@@ -1,57 +1,40 @@
 package com.polovnev.country.facade;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.polovnev.country.converter.CountryConverter;
 import com.polovnev.country.dto.CountryDto;
-import com.polovnev.country.entity.Country;
-import com.polovnev.country.service.CountryService;
 import com.polovnev.country.service.CustomMessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CountryFacade {
 
-    @Autowired
-    private CountryService countryService;
-
-    @Autowired
-    private CountryConverter countryConverter;
 
     @Autowired
     private CustomMessageSenderService customMessageSenderService;
 
 
     public List<CountryDto> findAll() {
-        return countryService.findAll().stream()
-                .map(countryConverter::entityToCountryDto).collect(Collectors.toList());
+        return null;
     }
 
     public CountryDto findById(Long id) {
-        Country country = countryService.findById(id);
-        return countryConverter.entityToCountryDto(country);
+        return null;
     }
 
     public CountryDto addCountry(CountryDto countryDto) {
-        Country country = countryConverter.dtoToEntity(countryDto);
-        Country savedCountry = countryService.addCountry(country);
-        return countryConverter.entityToCountryDto(savedCountry);
+        return null;
     }
 
-    public void addCountryRabbit(CountryDto countryDto)  {
+    public void addCountryRabbit(CountryDto countryDto) {
         customMessageSenderService.sendMessage(countryDto);
     }
 
     public CountryDto updateCountry(Long id, CountryDto countryDto) {
-        Country country = countryConverter.dtoToEntity(countryDto);
-        Country savedCountry = countryService.updateCountry(id, country);
-        return countryConverter.entityToCountryDto(savedCountry);
+        return null;
     }
 
     public void deleteCountry(Long id) {
-        countryService.deleteCountry(id);
     }
 }

@@ -2,9 +2,6 @@ package com.polovnev.country.service.impl;
 
 import com.polovnev.country.dto.CountryDto;
 import com.polovnev.country.service.CustomMessageSenderService;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageBuilder;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
