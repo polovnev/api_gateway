@@ -5,5 +5,7 @@ import com.polovnev.country.dto.CountryDto;
 
 public interface RabbitMessageSenderService {
 
-    void sendMessage(CountryDto countryDto);
+    void sendMessageAddCountry(CountryDto countryDto);
+
+    void sendMessageDeleteCountry(Long id);
 }

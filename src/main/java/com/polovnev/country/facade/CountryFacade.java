@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.net.URISyntaxException;
-import java.util.List;
 
 @Component
 public class CountryFacade {
@@ -33,7 +32,7 @@ public class CountryFacade {
     }
 
     public void addCountryRabbit(CountryDto countryDto) {
-        rabbitMessageSenderService.sendMessage(countryDto);
+        rabbitMessageSenderService.sendMessageAddCountry(countryDto);
     }
 
     public CountryDto updateCountry(Long id, CountryDto countryDto) {
@@ -41,5 +40,6 @@ public class CountryFacade {
     }
 
     public void deleteCountry(Long id) {
+        rabbitMessageSenderService.sendMessageDeleteCountry(id);
     }
 }

@@ -15,7 +15,12 @@ public class RabbitMessageSenderServiceImpl implements RabbitMessageSenderServic
     }
 
     @Override
-    public void sendMessage(CountryDto countryDto) {
+    public void sendMessageAddCountry(CountryDto countryDto) {
         rabbitTemplate.convertAndSend("country","create", countryDto);
+    }
+
+    @Override
+    public void sendMessageDeleteCountry(Long id) {
+        rabbitTemplate.convertAndSend("country","delete", id);
     }
 }
