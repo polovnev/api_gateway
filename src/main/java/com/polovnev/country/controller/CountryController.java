@@ -3,10 +3,13 @@ package com.polovnev.country.controller;
 
 import com.polovnev.country.dto.CountryDto;
 import com.polovnev.country.facade.CountryFacade;
-import com.polovnev.country.service.CustomMessageSenderService;
+import com.polovnev.country.service.RabbitMessageSenderService;
+import com.polovnev.country.service.RestMessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -17,10 +20,10 @@ public class CountryController {
     private CountryFacade countryFacade;
 
     @Autowired
-    private CustomMessageSenderService customMessageSenderService;
+    private RabbitMessageSenderService customMessageSenderService;
 
     @GetMapping
-    public List<CountryDto> getAllCountries() {
+    public ResponseEntity<String> getAllCountries() throws URISyntaxException {
         return countryFacade.findAll();
     }
 

@@ -1,22 +1,27 @@
 package com.polovnev.country.facade;
 
 import com.polovnev.country.dto.CountryDto;
-import com.polovnev.country.service.CustomMessageSenderService;
+import com.polovnev.country.service.RabbitMessageSenderService;
+import com.polovnev.country.service.RestMessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Component
 public class CountryFacade {
 
+    @Autowired
+    private RestMessageSenderService restMessageSenderService;
 
     @Autowired
-    private CustomMessageSenderService customMessageSenderService;
+    private RabbitMessageSenderService rabbitMessageSenderService;
 
 
-    public List<CountryDto> findAll() {
-        return null;
+    public ResponseEntity<String> findAll() throws URISyntaxException {
+        return restMessageSenderService.findAllCountries();
     }
 
     public CountryDto findById(Long id) {
@@ -28,7 +33,7 @@ public class CountryFacade {
     }
 
     public void addCountryRabbit(CountryDto countryDto) {
-        customMessageSenderService.sendMessage(countryDto);
+        rabbitMessageSenderService.sendMessage(countryDto);
     }
 
     public CountryDto updateCountry(Long id, CountryDto countryDto) {
