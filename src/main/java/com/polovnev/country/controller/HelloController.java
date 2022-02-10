@@ -15,6 +15,11 @@ public class HelloController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @GetMapping
+    public String start() {
+        return "Hello, I am OK!";
+    }
+
     @GetMapping("/hello")
     public String getHello() {
         HttpHeaders httpHeaders = new HttpHeaders();
