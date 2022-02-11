@@ -3,3 +3,6 @@ server:
 service:
   url:
     country: http://localhost:8000
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user

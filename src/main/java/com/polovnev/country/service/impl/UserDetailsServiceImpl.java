@@ -1,34 +1,29 @@
 package com.polovnev.country.service.impl;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import com.polovnev.country.dao.UserRepository;
+import com.polovnev.country.entity.CustomUserDetails;
+import com.polovnev.country.entity.UserEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final Map<String, UserDetails> users = new HashMap<>();
-
-    @PostConstruct
-    private void initUsers() {
-        GrantedAuthority userGrantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
-        GrantedAuthority adminGrantedAuthority = new SimpleGrantedAuthority("ROLE_ADMIN");
-        users.put("user", new User("user",
-                "pass", Collections.singletonList(userGrantedAuthority)));
-        users.put("admin", new User("admin",
-                "pass", Collections.singletonList(adminGrantedAuthority)));
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return users.get(username);
+    public UserDetails loadUserByUsername(String username) {
+        Optional<UserEntity> user = userRepository.findUserByUsername(username);
+
+        user.orElseThrow(() -> new UsernameNotFoundException("Could not find user"));
+
+        return new CustomUserDetails(user.get());
     }
 }

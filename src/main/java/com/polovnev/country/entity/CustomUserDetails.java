@@ -1,53 +1,31 @@
 package com.polovnev.country.entity;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
-@AllArgsConstructor
+
 @Data
-@Entity
-@Table(name = "user")
 public class CustomUserDetails implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "second_name")
-    private String secondName;
-
-    @Column(name = "system_name")
-    private String systemName;
-
-    @Column(name = "is_confirmed")
-    private Boolean isConfirmed;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "password")
+    private String username;
     private String password;
+    private String role;
 
-
-    private List<String> roles;
-
+    public CustomUserDetails(UserEntity user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.role = user.getRole().getRole();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toList());
+        return Collections.singletonList(new SimpleGrantedAuthority(role));
     }
 
     @Override
@@ -57,7 +35,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return systemName;
+        return username;
     }
 
     @Override
