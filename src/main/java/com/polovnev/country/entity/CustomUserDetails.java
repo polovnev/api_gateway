@@ -2,18 +2,46 @@ package com.polovnev.country.entity;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
+@Data
+@Entity
+@Table(name = "user")
 public class CustomUserDetails implements UserDetails {
 
-    private String userName;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "second_name")
+    private String secondName;
+
+    @Column(name = "system_name")
+    private String systemName;
+
+    @Column(name = "is_confirmed")
+    private Boolean isConfirmed;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+
     private List<String> roles;
 
 
@@ -24,12 +52,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "pass";
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return systemName;
     }
 
     @Override

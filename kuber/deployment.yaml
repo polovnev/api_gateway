@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: docker.io/polovnevad/api_gateway:v1
+        image: docker.io/polovnevad/api_gateway:v2
         ports:
           - containerPort: 8080
