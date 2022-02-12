@@ -6,3 +6,6 @@ service:
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/user
+    username: postgres
+    password: postgres
+    platform: postgres

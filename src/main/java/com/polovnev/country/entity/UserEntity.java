@@ -33,6 +33,6 @@ public class UserEntity {
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="role", nullable=false)
+    @JoinColumn(name="role")
     private Role role;
 }
