@@ -24,13 +24,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureStubRunner(
         stubsMode = StubRunnerProperties.StubsMode.LOCAL,
         ids = "com.polovnev:location:+:stubs:8000")
-public class BasicHelloControllerTest {
+public class BasicCountryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void given_WhenPassHello_ThenReturnHello()
+    public void given_WhenRequest_ThenReturnCountries()
             throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/country")
