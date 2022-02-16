@@ -24,4 +24,10 @@ public class RestMessageSenderServiceImpl implements RestMessageSenderService {
         URI uri = new URI(baseUrlCountry + "/country");
         return restTemplate.getForEntity(uri, String.class);
     }
+
+    @Override
+    public ResponseEntity<String> findByCountryId(Long countryId) throws URISyntaxException {
+        URI uri = new URI(baseUrlCountry + "/country/" + countryId + "/location");
+        return restTemplate.getForEntity(uri, String.class);
+    }
 }

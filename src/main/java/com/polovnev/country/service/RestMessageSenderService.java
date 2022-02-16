@@ -9,4 +9,6 @@ public interface RestMessageSenderService {
 
     ResponseEntity<String> findAllCountries() throws URISyntaxException;
 
+    ResponseEntity<String> findByCountryId(Long countryId) throws URISyntaxException;
+
 }
