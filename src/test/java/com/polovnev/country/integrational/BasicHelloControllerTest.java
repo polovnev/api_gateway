@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureJsonTesters
 @AutoConfigureStubRunner(
         stubsMode = StubRunnerProperties.StubsMode.LOCAL,
-        ids = "com.polovnev:country:+:stubs:8000")
+        ids = "com.polovnev:location:+:stubs:8000")
 public class BasicHelloControllerTest {
 
     @Autowired
@@ -33,9 +33,10 @@ public class BasicHelloControllerTest {
     public void given_WhenPassHello_ThenReturnHello()
             throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/hello")
+        mockMvc.perform(MockMvcRequestBuilders.get("/country")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string("hello"));
+                .andExpect(content()
+                        .string("[{\"id\":1,\"name\":\"countryOne\"},{\"id\":2,\"name\":\"countryTwo\"}]"));
     }
 }
