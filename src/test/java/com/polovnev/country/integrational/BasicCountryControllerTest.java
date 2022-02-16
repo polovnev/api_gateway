@@ -1,5 +1,6 @@
 package com.polovnev.country.integrational;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,23 @@ public class BasicCountryControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void given_WhenRequest_ThenReturnCountries()
+    public void given_WhenCountriesRequest_ThenReturnCountries()
             throws Exception {
-
         mockMvc.perform(MockMvcRequestBuilders.get("/country")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .string("[{\"id\":1,\"name\":\"countryOne\"},{\"id\":2,\"name\":\"countryTwo\"}]"));
+    }
+
+    @Test
+    public void given_WhenLocationsForCountryRequest_ThenReturnLocations()
+            throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/country/1/location")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content()
+                        .string("[{\"id\":1,\"name\":\"LocationOneForCountryOne\"}," +
+                                "{\"id\":2,\"name\":\"LocationTwoForCountryOne\"}]"));
     }
 }
