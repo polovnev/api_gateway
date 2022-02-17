@@ -1,14 +1,13 @@
 package com.polovnev.api_gateway.service;
 
 
-import org.springframework.http.ResponseEntity;
 import java.net.URISyntaxException;
 
 
 public interface RestMessageSenderService {
 
-    ResponseEntity<String> findAllCountries() throws URISyntaxException;
+    <T> T sendGetRequest(String uriString, Class<T> clazz) throws URISyntaxException;
 
-    ResponseEntity<String> findByCountryId(Long countryId) throws URISyntaxException;
+    <T> T sendPostRequest(String uriString, Object object, Class<T> clazz) throws URISyntaxException;
 
 }

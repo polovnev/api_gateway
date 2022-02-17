@@ -2,7 +2,9 @@ server:
   port: 8080
 service:
   url:
-    country: http://localhost:8000
+    location: http://localhost:8000
+    question_response: http://localhost:8081
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/user

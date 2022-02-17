@@ -18,7 +18,7 @@ public class LocationController {
     private LocationFacade locationFacade;
 
     @GetMapping
-    public ResponseEntity<String> findByCountryId(@PathVariable Long countryId) throws URISyntaxException {
+    public String findByCountryId(@PathVariable Long countryId) throws URISyntaxException {
         return locationFacade.findByCountryId(countryId);
     }
 }

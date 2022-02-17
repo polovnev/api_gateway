@@ -21,7 +21,7 @@ public class CountryController {
     private RabbitMessageSenderService customMessageSenderService;
 
     @GetMapping
-    public ResponseEntity<String> getAllCountries() throws URISyntaxException {
+    public String getAllCountries() throws URISyntaxException {
         return countryFacade.findAll();
     }
 

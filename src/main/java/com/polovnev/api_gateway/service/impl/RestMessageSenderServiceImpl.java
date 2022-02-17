@@ -13,21 +13,18 @@ import java.net.URISyntaxException;
 @Service
 public class RestMessageSenderServiceImpl implements RestMessageSenderService {
 
-    @Value("${service.url.country}")
-    private String baseUrlCountry;
-
     @Autowired
     private RestTemplate restTemplate;
 
     @Override
-    public ResponseEntity<String> findAllCountries() throws URISyntaxException {
-        URI uri = new URI(baseUrlCountry + "/country");
-        return restTemplate.getForEntity(uri, String.class);
+    public <T> T sendGetRequest(String uriString, Class<T> clazz) throws URISyntaxException {
+        URI uri = new URI(uriString);
+        return restTemplate.getForEntity(uri, clazz).getBody();
     }
 
     @Override
-    public ResponseEntity<String> findByCountryId(Long countryId) throws URISyntaxException {
-        URI uri = new URI(baseUrlCountry + "/country/" + countryId + "/location");
-        return restTemplate.getForEntity(uri, String.class);
+    public <T> T sendPostRequest(String uriString, Object object, Class<T> clazz) throws URISyntaxException {
+        URI uri = new URI(uriString);
+        return restTemplate.postForEntity(uri, object, clazz).getBody();
     }
 }
