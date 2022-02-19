@@ -1,5 +1,6 @@
 package com.polovnev.api_gateway.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "role")
+@AllArgsConstructor
 public class Role {
 
     @Id
@@ -19,5 +21,7 @@ public class Role {
 
     @Column(name = "role")
     private String role;
+
+    public Role(){}
 
 }

@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 
 @Service
@@ -25,5 +27,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.orElseThrow(() -> new UsernameNotFoundException("Could not find user"));
 
         return new CustomUserDetails(user.get());
+    }
+
+    public Stream<UserEntity> getUsersByIds(Set<Long> ids) {
+        Iterable<UserEntity> userEntityIterable = userRepository.findAllById(ids);
+        return StreamSupport.stream(userEntityIterable.spliterator(), false);
     }
 }

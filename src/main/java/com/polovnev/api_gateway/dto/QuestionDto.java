@@ -9,6 +9,7 @@ public class QuestionDto {
     private Long ratePoints;
     private String text;
     private Long author;
+    private String authorName;
     private Long location;
     private Boolean isResponded;
 
