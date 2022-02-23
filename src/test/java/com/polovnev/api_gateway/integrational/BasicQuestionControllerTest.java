@@ -2,7 +2,6 @@ package com.polovnev.api_gateway.integrational;
 
 import com.polovnev.api_gateway.entity.UserEntity;
 import com.polovnev.api_gateway.service.UserService;
-import com.polovnev.api_gateway.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
