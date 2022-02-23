@@ -4,13 +4,11 @@ import com.polovnev.api_gateway.dto.QuestionDto;
 import com.polovnev.api_gateway.dto.SearchRequest;
 import com.polovnev.api_gateway.entity.UserEntity;
 import com.polovnev.api_gateway.service.RestMessageSenderService;
-import com.polovnev.api_gateway.service.impl.UserDetailsServiceImpl;
-import org.modelmapper.TypeToken;
+import com.polovnev.api_gateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,7 +20,7 @@ public class QuestionFacade {
     private RestMessageSenderService restMessageSenderService;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserService userService;
 
     @Value("${service.url.question_response}")
     private String baseUrlQuestionResponse;
@@ -37,7 +35,7 @@ public class QuestionFacade {
 
     private List<QuestionDto> setUsernameForQuestionDto(List<QuestionDto> questionDtos) {
         Set<Long> authorIds = questionDtos.stream().map(QuestionDto::getAuthor).collect(Collectors.toSet());
-        Map<Long, String> mapIdUsername = userDetailsService.getUsersByIds(authorIds)
+        Map<Long, String> mapIdUsername = userService.getUsersByIds(authorIds)
                 .collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));
         questionDtos.forEach(questionDto -> {
             Long id = questionDto.getAuthor();

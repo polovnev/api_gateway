@@ -1,5 +1,6 @@
 package com.polovnev.api_gateway.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_entity")
 @Data
+@Builder
 public class UserEntity {
 
     @Id
