@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "a1319f98-eb19-495c-9d99-5b686fc8977a",
+		"name": "api-gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"firstName\",\n    \"secondName\": \"secondName\",\n    \"username\": \"username\",\n    \"email\": \"email\",\n    \"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/registration",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list of countries",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/country",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"country"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list of locations by country id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/country/2/location",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"country",
+						"2",
+						"location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "questions search request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"locationId\": 1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/question/find",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"question",
+						"find"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get question by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"locationId\": 1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/question/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"question",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
