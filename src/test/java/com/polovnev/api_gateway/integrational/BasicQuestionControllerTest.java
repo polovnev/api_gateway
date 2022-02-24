@@ -39,8 +39,6 @@ public class BasicQuestionControllerTest {
     @MockBean
     private UserService userService;
 
-    @MockBean
-    private UserDetailsService userDetailsService;
 
     @Test
     public void given_WhenFindQuestions_ThenReturnQuestions()

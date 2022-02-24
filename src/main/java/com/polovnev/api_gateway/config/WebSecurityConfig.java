@@ -84,6 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/country").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.PUT, "/country/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/country/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/question/find").permitAll()
+                .antMatchers(HttpMethod.GET,"/question/**").permitAll()
                 .anyRequest().authenticated().and().httpBasic();
 
         // Add JWT token filter

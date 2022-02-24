@@ -26,11 +26,16 @@ public class QuestionFacade {
     private String baseUrlQuestionResponse;
 
     public List<QuestionDto> findQuestionByRequest(SearchRequest searchRequest) throws URISyntaxException {
-
         String uri = baseUrlQuestionResponse + "/question/find";
         List<QuestionDto> questionDtos = Arrays.asList(restMessageSenderService.sendPostRequest(uri,
                 searchRequest, QuestionDto[].class));
         return setUsernameForQuestionDto(questionDtos);
+    }
+
+    public QuestionDto getQuestionById(Long id) throws URISyntaxException {
+        String uri = baseUrlQuestionResponse + "/question/" + id;
+        List<QuestionDto> questionDtos = Collections.singletonList(restMessageSenderService.sendGetRequest(uri, QuestionDto.class));
+        return setUsernameForQuestionDto(questionDtos).get(0);
     }
 
     private List<QuestionDto> setUsernameForQuestionDto(List<QuestionDto> questionDtos) {
