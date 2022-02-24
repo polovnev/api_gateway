@@ -32,8 +32,7 @@ public class BasicCountryControllerTest {
     @Test
     public void given_WhenCountriesRequest_ThenReturnCountries()
             throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/country")
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/country"))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .string("[{\"id\":1,\"name\":\"countryOne\"},{\"id\":2,\"name\":\"countryTwo\"}]"));
@@ -42,8 +41,7 @@ public class BasicCountryControllerTest {
     @Test
     public void given_WhenLocationsForCountryRequest_ThenReturnLocations()
             throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/country/1/location")
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/country/1/location"))
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .string("[{\"id\":1,\"name\":\"LocationOneForCountryOne\"}," +
