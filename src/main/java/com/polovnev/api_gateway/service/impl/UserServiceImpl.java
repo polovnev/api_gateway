@@ -10,14 +10,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private static final Integer ID_ROLE_USER = 2;
 
@@ -45,5 +47,19 @@ public class UserServiceImpl implements UserService{
     public Stream<UserEntity> getUsersByIds(Set<Long> ids) {
         Iterable<UserEntity> userEntityIterable = userRepository.findAllById(ids);
         return StreamSupport.stream(userEntityIterable.spliterator(), false);
+    }
+
+    public <T> List<T> setUsernameForDto(List<T> dtos,
+                                               Function<T, Long> getAuthorId,
+                                               BiConsumer<T, String> setUsername) {
+        Set<Long> authorIds = dtos.stream().map(getAuthorId).collect(Collectors.toSet());
+        Map<Long, String> mapIdUsername = getUsersByIds(authorIds)
+                .collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));
+        dtos.forEach(dto -> {
+            Long id = getAuthorId.apply(dto);
+            String username = mapIdUsername.get(id);
+            setUsername.accept(dto, username);
+        });
+        return dtos;
     }
 }
