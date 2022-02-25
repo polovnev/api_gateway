@@ -5,6 +5,8 @@ import com.polovnev.api_gateway.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,11 +17,14 @@ import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.polovnev.api_gateway.com.polovnev.util.FileReaderTestUtil.getRequestJson;
+import static com.polovnev.api_gateway.com.polovnev.util.FileReaderTestUtil.getResponseJson;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,31 +47,36 @@ public class BasicQuestionControllerTest {
     @Test
     public void given_WhenFindQuestions_ThenReturnQuestions()
             throws Exception {
+
+        final String expectedResponseJson = getResponseJson("given_WhenFindQuestions_ThenReturnQuestions");
+
         Mockito.when(userService.getUsersByIds(Stream.of(1L)
                 .collect(Collectors.toSet())))
                 .thenReturn(Stream.of(UserEntity.builder().id(1L).username("admin").build()));
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/question/find")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/question/find")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\n" +
-                                "    \"locationId\": 1\n" +
-                                "}"))
-                .andExpect(status().isOk())
-                .andExpect(content()
-                        .string("[{\"id\":1,\"ratePoints\":null,\"text\":\"First question?\",\"author\":1,\"authorName\":\"admin\",\"location\":1,\"isResponded\":true},{\"id\":2,\"ratePoints\":null,\"text\":\"Second question?\",\"author\":1,\"authorName\":\"admin\",\"location\":1,\"isResponded\":false}]"));
+                        .content(getRequestJson("given_WhenFindQuestions_ThenReturnQuestions")))
+                .andExpect(status().isOk()).andReturn();
+
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+        JSONAssert.assertEquals(expectedResponseJson, contentAsString, JSONCompareMode.STRICT);
     }
 
     @Test
     public void given_WhenGetQuestionById_ThenReturnQuestionById()
             throws Exception {
+        final String expectedResponseJson = getResponseJson("given_WhenGetQuestionById_ThenReturnQuestionById");
+
         Mockito.when(userService.getUsersByIds(Stream.of(1L)
                         .collect(Collectors.toSet())))
                 .thenReturn(Stream.of(UserEntity.builder().id(1L).username("admin").build()));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/question/1"))
-                .andExpect(status().isOk())
-                .andExpect(content()
-                        .string("{\"id\":1,\"ratePoints\":null,\"text\":\"First question?\",\"author\":1,\"authorName\":\"admin\",\"location\":1,\"isResponded\":true}"));
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/question/1"))
+                .andExpect(status().isOk()).andReturn();
+
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+        JSONAssert.assertEquals(expectedResponseJson, contentAsString, JSONCompareMode.STRICT);
     }
 
 }
