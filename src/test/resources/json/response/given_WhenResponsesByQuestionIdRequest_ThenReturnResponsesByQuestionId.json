@@ -1,0 +1,16 @@
+[
+  {
+    "responseId": 1,
+    "text": "First response!",
+    "author": 1,
+    "authorName": "admin",
+    "isResponse": true
+  },
+  {
+    "responseId": 2,
+    "text": "Second response!",
+    "author": 1,
+    "authorName": "admin",
+    "isResponse": true
+  }
+]
