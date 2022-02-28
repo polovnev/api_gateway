@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class RegistrationController {
 
@@ -14,7 +16,7 @@ public class RegistrationController {
     private UserFacade registrationFacade;
 
     @PostMapping("/registration")
-    public void registration(@RequestBody UserDto userDto){
+    public void registration(@RequestBody @Valid UserDto userDto){
         registrationFacade.registration(userDto);
     }
 }
