@@ -5,5 +5,8 @@
   "author": 1,
   "authorName": "admin",
   "location": 1,
-  "isResponded": true
+  "isResponded": true,
+  "createdDate": "-999999999-01-01",
+  "tags": null,
+  "responses": null
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -52,6 +53,9 @@ public class UserServiceImpl implements UserService {
     public <T> List<T> setUsernameForDto(List<T> dtos,
                                                Function<T, Long> getAuthorId,
                                                BiConsumer<T, String> setUsername) {
+        if(CollectionUtils.isEmpty(dtos)) {
+            return dtos;
+        }
         Set<Long> authorIds = dtos.stream().map(getAuthorId).collect(Collectors.toSet());
         Map<Long, String> mapIdUsername = getUsersByIds(authorIds)
                 .collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));

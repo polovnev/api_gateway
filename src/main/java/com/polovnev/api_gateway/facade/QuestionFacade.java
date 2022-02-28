@@ -1,6 +1,7 @@
 package com.polovnev.api_gateway.facade;
 
 import com.polovnev.api_gateway.dto.QuestionDto;
+import com.polovnev.api_gateway.dto.ResponseDto;
 import com.polovnev.api_gateway.dto.SearchRequest;
 import com.polovnev.api_gateway.service.RestMessageSenderService;
 import com.polovnev.api_gateway.service.UserService;
@@ -32,8 +33,12 @@ public class QuestionFacade {
 
     public QuestionDto getQuestionById(Long id) throws URISyntaxException {
         String uri = baseUrlQuestionResponse + "/question/" + id;
-        List<QuestionDto> questionDtos = Collections.singletonList(restMessageSenderService.sendGetRequest(uri, QuestionDto.class));
-        return userService.setUsernameForDto(questionDtos, QuestionDto::getAuthor, QuestionDto::setAuthorName).get(0);
+        QuestionDto questionDto = restMessageSenderService.sendGetRequest(uri, QuestionDto.class);
+        userService.setUsernameForDto(questionDto.getResponses(),
+                ResponseDto::getAuthor, ResponseDto::setAuthorName);
+        return userService
+                .setUsernameForDto(Collections.singletonList(questionDto),
+                        QuestionDto::getAuthor, QuestionDto::setAuthorName).get(0);
     }
 
 }
