@@ -18,4 +18,6 @@ public interface UserService extends UserDetailsService {
     <T> List<T> setUsernameForDto(List<T> dtos,
                                   Function<T, Long> getAuthorId,
                                   BiConsumer<T, String> setUsername);
+
+    void activateUser(String username, String activationCode);
 }

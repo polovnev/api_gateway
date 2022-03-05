@@ -1,11 +1,9 @@
 package com.polovnev.api_gateway.controller;
 
 import com.polovnev.api_gateway.dto.UserDto;
-import com.polovnev.api_gateway.facade.UserFacade;
+import com.polovnev.api_gateway.facade.RegistrationFacade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -13,10 +11,16 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     @Autowired
-    private UserFacade registrationFacade;
+    private RegistrationFacade registrationFacade;
 
     @PostMapping("/registration")
     public void registration(@RequestBody @Valid UserDto userDto){
         registrationFacade.registration(userDto);
     }
+
+    @GetMapping("/activate")
+    public void activateUser(@RequestParam String username, @RequestParam String activationCode) {
+        registrationFacade.activateUser(username, activationCode);
+    }
+
 }

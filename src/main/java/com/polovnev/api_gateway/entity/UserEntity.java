@@ -38,6 +38,9 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "activation_code")
+    private String activationCode;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="role")
     private Role role;

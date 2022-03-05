@@ -36,11 +36,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void activateUser(String username, String activationCode) {
+        userRepository.activateUser(username, activationCode);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) {
         Optional<UserEntity> user = userRepository.findUserByUsername(username);
-
         user.orElseThrow(() -> new UsernameNotFoundException("Could not find user"));
-
         return new CustomUserDetails(user.get());
     }
 
