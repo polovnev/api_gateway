@@ -1,6 +1,8 @@
 package com.polovnev.api_gateway.facade;
 
+import com.polovnev.api_gateway.dto.QuestionDto;
 import com.polovnev.api_gateway.dto.ResponseDto;
+import com.polovnev.api_gateway.service.RabbitMessageSenderService;
 import com.polovnev.api_gateway.service.RestMessageSenderService;
 import com.polovnev.api_gateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ResponseFacade {
     private RestMessageSenderService restMessageSenderService;
 
     @Autowired
+    private RabbitMessageSenderService rabbitMessageSenderService;
+
+    @Autowired
     private UserService userService;
 
     public List<ResponseDto> findResponsesByQuestionId(Long questionId) throws URISyntaxException {
@@ -29,6 +34,11 @@ public class ResponseFacade {
         List<ResponseDto> responseDtoList = Arrays.asList(responseDtos);
         return userService.setUsernameForDto(responseDtoList,
                 ResponseDto::getAuthor, ResponseDto::setAuthorName);
+    }
+
+    public void createResponse(Long questionId, ResponseDto responseDto) {
+        responseDto.setQuestion(QuestionDto.builder().id(questionId).build());
+        rabbitMessageSenderService.sendMessageCreateResponse(responseDto);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.polovnev.api_gateway.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 @Data
+@Builder
 public class QuestionDto {
 
     private Long id;

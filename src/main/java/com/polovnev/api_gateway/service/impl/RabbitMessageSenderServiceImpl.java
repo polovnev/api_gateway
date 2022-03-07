@@ -2,6 +2,7 @@ package com.polovnev.api_gateway.service.impl;
 
 import com.polovnev.api_gateway.dto.CountryDto;
 import com.polovnev.api_gateway.dto.QuestionDto;
+import com.polovnev.api_gateway.dto.ResponseDto;
 import com.polovnev.api_gateway.service.RabbitMessageSenderService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,10 @@ public class RabbitMessageSenderServiceImpl implements RabbitMessageSenderServic
     @Override
     public void sendMessageCreateQuestion(QuestionDto questionDto) {
         rabbitTemplate.convertAndSend("question", "create", questionDto);
+    }
+
+    @Override
+    public void sendMessageCreateResponse(ResponseDto responseDto) {
+        rabbitTemplate.convertAndSend("response", "create", responseDto);
     }
 }

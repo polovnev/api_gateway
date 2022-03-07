@@ -10,5 +10,6 @@ public class ResponseDto {
     private Long author;
     private String authorName;
     private Boolean isResponse;
+    private QuestionDto question;
 
 }

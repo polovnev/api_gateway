@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6333c0c3-2f75-454c-89ce-9bd08a7d67bc",
+		"_postman_id": "6c4d6764-8a21-4640-933e-7441c188ff12",
 		"name": "api-gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -298,6 +298,40 @@
 					],
 					"path": [
 						"question"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create response",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"How are you?\",\n    \"location\": 1,\n    \"author\": 1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/question/1/response",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"question",
+						"1",
+						"response"
 					]
 				}
 			},
