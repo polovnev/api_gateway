@@ -14,16 +14,11 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "Bearer {{token}}",
-						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstName\": \"firstName\",\n    \"secondName\": \"secondName\",\n    \"username\": \"username\",\n    \"email\": \"email\",\n    \"password\": \"password\"\n}"
+					"raw": "{\n    \"firstName\": \"\",\n    \"secondName\": \"\",\n    \"username\": \"username7\",\n    \"email\": \"email\",\n    \"password\": \"password\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/registration",
@@ -238,7 +233,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}"
+					"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\"\n}"
 				},
 				"url": {
 					"raw": "{{url}}/login",
@@ -247,6 +242,62 @@
 					],
 					"path": [
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activate user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/activate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create question",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"text\": \"How are you?\",\n    \"location\": 1,\n    \"author\": 1\n}"
+				},
+				"url": {
+					"raw": "{{url}}/question",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"question"
 					]
 				}
 			},

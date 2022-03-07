@@ -7,6 +7,7 @@ import com.polovnev.api_gateway.facade.QuestionFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -25,5 +26,10 @@ public class QuestionController {
     @GetMapping("/{id}")
     public QuestionDto getQuestionById(@PathVariable Long id) throws URISyntaxException {
         return questionFacade.getQuestionById(id);
+    }
+
+    @PostMapping
+    public void createQuestion(@RequestBody @Valid QuestionDto questionDto) {
+        questionFacade.createQuestion(questionDto);
     }
 }

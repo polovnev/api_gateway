@@ -1,6 +1,7 @@
 package com.polovnev.api_gateway.service.impl;
 
 import com.polovnev.api_gateway.dto.CountryDto;
+import com.polovnev.api_gateway.dto.QuestionDto;
 import com.polovnev.api_gateway.service.RabbitMessageSenderService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,16 @@ public class RabbitMessageSenderServiceImpl implements RabbitMessageSenderServic
 
     @Override
     public void sendMessageAddCountry(CountryDto countryDto) {
-    //    rabbitTemplate.convertAndSend("country","create", countryDto);
+        //    rabbitTemplate.convertAndSend("country","create", countryDto);
     }
 
     @Override
     public void sendMessageDeleteCountry(Long id) {
-    //    rabbitTemplate.convertAndSend("country","delete", id);
+        //    rabbitTemplate.convertAndSend("country","delete", id);
+    }
+
+    @Override
+    public void sendMessageCreateQuestion(QuestionDto questionDto) {
+        rabbitTemplate.convertAndSend("question", "create", questionDto);
     }
 }
