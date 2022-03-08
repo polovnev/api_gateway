@@ -27,4 +27,10 @@ public class RestMessageSenderServiceImpl implements RestMessageSenderService {
         URI uri = new URI(uriString);
         return restTemplate.postForEntity(uri, object, clazz).getBody();
     }
+
+    @Override
+    public void sendPutRequest(String uriString, Object object) throws URISyntaxException {
+        URI uri = new URI(uriString);
+        restTemplate.put(uri, object);
+    }
 }

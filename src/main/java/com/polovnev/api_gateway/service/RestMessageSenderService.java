@@ -10,4 +10,5 @@ public interface RestMessageSenderService {
 
     <T> T sendPostRequest(String uriString, Object object, Class<T> clazz) throws URISyntaxException;
 
+    void sendPutRequest(String uriString, Object object) throws URISyntaxException;
 }

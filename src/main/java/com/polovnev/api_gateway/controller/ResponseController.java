@@ -24,4 +24,9 @@ public class ResponseController {
     public List<ResponseDto> findResponsesByQuestionId(@PathVariable Long questionId) throws URISyntaxException {
         return responseFacade.findResponsesByQuestionId(questionId);
     }
+
+    @PutMapping("/{responseId}")
+    public void setIsResponseTrue(@PathVariable(name = "responseId") Long responseId) throws URISyntaxException {
+        responseFacade.setIsResponseTrue(responseId);
+    }
 }
