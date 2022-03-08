@@ -2,16 +2,14 @@
   {
     "id": 1,
     "text": "First response!",
-    "authorId": 1,
-    "authorName": "admin",
+    "authorId": "1",
     "isResponse": true,
     "question": null
   },
   {
     "id": 2,
     "text": "Second response!",
-    "authorId": 1,
-    "authorName": "admin",
+    "authorId": "1",
     "isResponse": true,
     "question": null
   }

@@ -39,7 +39,8 @@ public class BasicResponseControllerTest {
 
 
     @Test
-    public void given_WhenResponsesByQuestionIdRequest_ThenReturnResponsesByQuestionId()
+    public void
+    given_WhenResponsesByQuestionIdRequest_ThenReturnResponsesByQuestionId()
             throws Exception {
 
         final String expectedResponseJson = getResponseJson("given_WhenResponsesByQuestionIdRequest_ThenReturnResponsesByQuestionId");

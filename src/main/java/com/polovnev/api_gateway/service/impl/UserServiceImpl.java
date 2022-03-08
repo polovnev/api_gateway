@@ -53,20 +53,4 @@ public class UserServiceImpl implements UserService {
         return StreamSupport.stream(userEntityIterable.spliterator(), false);
     }
 
-    public <T> List<T> setUsernameForDto(List<T> dtos,
-                                               Function<T, Long> getAuthorId,
-                                               BiConsumer<T, String> setUsername) {
-        if(CollectionUtils.isEmpty(dtos)) {
-            return dtos;
-        }
-        Set<Long> authorIds = dtos.stream().map(getAuthorId).collect(Collectors.toSet());
-        Map<Long, String> mapIdUsername = getUsersByIds(authorIds)
-                .collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));
-        dtos.forEach(dto -> {
-            Long id = getAuthorId.apply(dto);
-            String username = mapIdUsername.get(id);
-            setUsername.accept(dto, username);
-        });
-        return dtos;
-    }
 }

@@ -32,9 +32,7 @@ public class ResponseFacade {
     public List<ResponseDto> findResponsesByQuestionId(Long questionId) throws URISyntaxException {
         String uri = baseUrlQuestionResponse + "/question/" + questionId + "/response";
         ResponseDto[] responseDtos = restMessageSenderService.sendGetRequest(uri, ResponseDto[].class);
-        List<ResponseDto> responseDtoList = Arrays.asList(responseDtos);
-        return userService.setUsernameForDto(responseDtoList,
-                ResponseDto::getAuthorId, ResponseDto::setAuthorName);
+        return Arrays.asList(responseDtos);
     }
 
     public void createResponse(Long questionId, ResponseDto responseDto) {
@@ -42,7 +40,7 @@ public class ResponseFacade {
         rabbitMessageSenderService.sendMessageCreateResponse(responseDto);
     }
 
-    public void setIsResponseTrue(Long responseId) throws URISyntaxException {
+    public void setIsResponseTrue(Long responseId, Long questionId, String userId) throws URISyntaxException {
         String uri = baseUrlQuestionResponse + "/question/" + null + "/response/" + responseId;
         restMessageSenderService.sendPutRequest(uri, Optional.empty());
     }

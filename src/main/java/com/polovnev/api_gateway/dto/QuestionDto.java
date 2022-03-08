@@ -18,8 +18,7 @@ public class QuestionDto {
     @NotBlank
     private String text;
     @NotNull
-    private Long authorId;
-    private String authorName;
+    private String authorId;
     @NotNull
     private Long location;
     private Boolean isResponded;
