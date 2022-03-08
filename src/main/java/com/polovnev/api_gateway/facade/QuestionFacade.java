@@ -32,7 +32,7 @@ public class QuestionFacade {
         String uri = baseUrlQuestionResponse + "/question/find";
         List<QuestionDto> questionDtos = Arrays.asList(restMessageSenderService.sendPostRequest(uri,
                 searchRequest, QuestionDto[].class));
-        return userService.setUsernameForDto(questionDtos, QuestionDto::getAuthor, QuestionDto::setAuthorName);
+        return userService.setUsernameForDto(questionDtos, QuestionDto::getAuthorId, QuestionDto::setAuthorName);
     }
 
     public QuestionDto getQuestionById(Long id) throws URISyntaxException {
@@ -42,7 +42,7 @@ public class QuestionFacade {
                 ResponseDto::getAuthor, ResponseDto::setAuthorName);
         return userService
                 .setUsernameForDto(Collections.singletonList(questionDto),
-                        QuestionDto::getAuthor, QuestionDto::setAuthorName).get(0);
+                        QuestionDto::getAuthorId, QuestionDto::setAuthorName).get(0);
     }
 
     public void createQuestion(QuestionDto questionDto) {

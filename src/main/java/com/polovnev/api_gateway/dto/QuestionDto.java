@@ -18,7 +18,7 @@ public class QuestionDto {
     @NotBlank
     private String text;
     @NotNull
-    private Long author;
+    private Long authorId;
     private String authorName;
     @NotNull
     private Long location;
