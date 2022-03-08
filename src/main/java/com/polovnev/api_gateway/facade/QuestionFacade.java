@@ -39,7 +39,7 @@ public class QuestionFacade {
         String uri = baseUrlQuestionResponse + "/question/" + id;
         QuestionDto questionDto = restMessageSenderService.sendGetRequest(uri, QuestionDto.class);
         userService.setUsernameForDto(questionDto.getResponses(),
-                ResponseDto::getAuthor, ResponseDto::setAuthorName);
+                ResponseDto::getAuthorId, ResponseDto::setAuthorName);
         return userService
                 .setUsernameForDto(Collections.singletonList(questionDto),
                         QuestionDto::getAuthorId, QuestionDto::setAuthorName).get(0);

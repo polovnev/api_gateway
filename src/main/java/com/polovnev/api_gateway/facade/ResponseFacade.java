@@ -8,7 +8,6 @@ import com.polovnev.api_gateway.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.net.URISyntaxException;
 import java.util.Arrays;
@@ -35,7 +34,7 @@ public class ResponseFacade {
         ResponseDto[] responseDtos = restMessageSenderService.sendGetRequest(uri, ResponseDto[].class);
         List<ResponseDto> responseDtoList = Arrays.asList(responseDtos);
         return userService.setUsernameForDto(responseDtoList,
-                ResponseDto::getAuthor, ResponseDto::setAuthorName);
+                ResponseDto::getAuthorId, ResponseDto::setAuthorName);
     }
 
     public void createResponse(Long questionId, ResponseDto responseDto) {

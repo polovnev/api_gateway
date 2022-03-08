@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class ResponseDto {
 
-    private Long responseId;
+    private Long id;
     private String text;
-    private Long author;
+    private Long authorId;
     private String authorName;
     private Boolean isResponse;
     private QuestionDto question;
