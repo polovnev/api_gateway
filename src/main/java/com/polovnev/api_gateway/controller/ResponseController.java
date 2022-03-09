@@ -3,7 +3,6 @@ package com.polovnev.api_gateway.controller;
 import com.polovnev.api_gateway.dto.ResponseDto;
 import com.polovnev.api_gateway.facade.ResponseFacade;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
@@ -28,9 +27,10 @@ public class ResponseController {
     }
 
     @PutMapping("/{responseId}")
-    public void setIsResponseTrue(@PathVariable(name = "responseId") Long responseId,
-                                  @PathVariable(name = "questionId") Long questionId,
-                                  Principal principal) throws URISyntaxException {
-        responseFacade.setIsResponseTrue(responseId, questionId, principal.getName());
+    public void setIsResponse(@PathVariable(name = "responseId") Long responseId,
+                              @PathVariable(name = "questionId") Long questionId,
+                              @RequestParam(name = "isResponse") boolean isResponse,
+                              Principal principal) throws URISyntaxException {
+        responseFacade.setIsResponse(responseId, questionId, principal.getName(), isResponse);
     }
 }

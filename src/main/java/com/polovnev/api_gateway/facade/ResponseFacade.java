@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class ResponseFacade {
@@ -40,9 +39,11 @@ public class ResponseFacade {
         rabbitMessageSenderService.sendMessageCreateResponse(responseDto);
     }
 
-    public void setIsResponseTrue(Long responseId, Long questionId, String userId) throws URISyntaxException {
-        String uri = baseUrlQuestionResponse + "/question/" + null + "/response/" + responseId;
-        restMessageSenderService.sendPutRequest(uri, Optional.empty());
+    public void setIsResponse(Long responseId, Long questionId,
+                              String userId, boolean isResponse) throws URISyntaxException {
+        String uri = baseUrlQuestionResponse + "/question/" + questionId +
+                "/response/" + responseId + "?isResponse=" + isResponse;
+        restMessageSenderService.sendPutRequest(uri, userId);
     }
 
 }
