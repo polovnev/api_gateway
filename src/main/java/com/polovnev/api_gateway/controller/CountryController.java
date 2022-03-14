@@ -5,7 +5,6 @@ import com.polovnev.api_gateway.dto.CountryDto;
 import com.polovnev.api_gateway.facade.CountryFacade;
 import com.polovnev.api_gateway.service.RabbitMessageSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;

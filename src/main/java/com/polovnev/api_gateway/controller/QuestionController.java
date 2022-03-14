@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import java.net.URISyntaxException;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
