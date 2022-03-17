@@ -1,7 +1,6 @@
 package com.polovnev.api_gateway.facade;
 
 import com.polovnev.api_gateway.dto.QuestionDto;
-import com.polovnev.api_gateway.dto.ResponseDto;
 import com.polovnev.api_gateway.dto.SearchRequest;
 import com.polovnev.api_gateway.service.RabbitMessageSenderService;
 import com.polovnev.api_gateway.service.RestMessageSenderService;
