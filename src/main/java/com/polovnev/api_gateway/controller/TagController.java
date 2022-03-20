@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URISyntaxException;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/tag")
 public class TagController {

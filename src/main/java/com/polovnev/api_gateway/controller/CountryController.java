@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/country")
 public class CountryController {

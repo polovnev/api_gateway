@@ -9,7 +9,6 @@ import java.net.URISyntaxException;
 import java.security.Principal;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/question/{questionId}/response")
 public class ResponseController {

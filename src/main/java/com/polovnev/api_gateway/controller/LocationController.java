@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/country/{countryId}/location")
 public class LocationController {

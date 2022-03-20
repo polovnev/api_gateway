@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import java.net.URISyntaxException;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
@@ -19,6 +18,7 @@ public class QuestionController {
     @Autowired
     private QuestionFacade questionFacade;
 
+    @CrossOrigin
     @PostMapping("/find")
     public List<QuestionDto> findQuestionByRequest(@RequestBody SearchRequest searchRequest) throws URISyntaxException {
         return questionFacade.findQuestionByRequest(searchRequest);
