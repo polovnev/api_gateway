@@ -17,7 +17,6 @@ public class QuestionDto {
     private Long ratePoints;
     @NotBlank
     private String text;
-    @NotNull
     private String authorId;
     @NotNull
     private Long location;

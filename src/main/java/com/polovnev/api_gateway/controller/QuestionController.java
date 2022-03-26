@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URISyntaxException;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,8 @@ public class QuestionController {
     }
 
     @PostMapping
-    public void createQuestion(@RequestBody @Valid QuestionDto questionDto) {
+    public void createQuestion(@RequestBody @Valid QuestionDto questionDto, Principal principal) {
+        questionDto.setAuthorId(principal.getName());
         questionFacade.createQuestion(questionDto);
     }
 }
