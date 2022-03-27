@@ -4,5 +4,5 @@ import jakarta.mail.MessagingException;
 
 public interface EmailSenderService {
 
-     void sendApproveAccountEmail(String destinationEmail, String activationCode) throws MessagingException;
+     void sendApproveAccountEmail(String destinationEmail, String activationCode, String username) throws MessagingException;
 }

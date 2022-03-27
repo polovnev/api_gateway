@@ -20,7 +20,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 
 
     @Override
-    public void sendApproveAccountEmail(String destinationEmail, String activationCode)
+    public void sendApproveAccountEmail(String destinationEmail, String activationCode, String username)
             throws MessagingException {
         Properties properties = getEmailProperties();
         Session session = Session.getInstance(properties, new Authenticator() {
@@ -36,7 +36,8 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 
         message.setText("<h1>Приветствую!</h1><br>" +
                 " Для завершения регестрации перейдите по ссылке " +
-                "http://localhost:8080/confirmRegistration/" + activationCode);
+                "http://localhost:8080/confirmRegistration?activationCode=" + activationCode +
+                "&username=" + username);
 
         Transport.send(message);
     }

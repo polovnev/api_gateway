@@ -31,7 +31,7 @@ public class RegistrationFacade {
         final String activationCode = generateActivationCode();
         user.setActivationCode(activationCode);
         userService.registration(user);
-        emailSenderService.sendApproveAccountEmail(user.getEmail(), activationCode);
+        emailSenderService.sendApproveAccountEmail(user.getEmail(), activationCode, userDto.getUsername());
     }
 
     public void activateUser(String username, String activationCode) {
