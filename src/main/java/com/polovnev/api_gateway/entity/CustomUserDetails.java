@@ -16,11 +16,13 @@ public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;
     private String role;
+    private Boolean isConfirmed;
 
     public CustomUserDetails(UserEntity user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.role = user.getRole().getRole();
+        this.isConfirmed = user.getIsConfirmed();
     }
 
     @Override
@@ -55,6 +57,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isConfirmed;
     }
 }
