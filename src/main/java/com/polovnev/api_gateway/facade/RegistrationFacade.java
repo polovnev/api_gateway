@@ -3,8 +3,9 @@ package com.polovnev.api_gateway.facade;
 import com.polovnev.api_gateway.converter.UserConverter;
 import com.polovnev.api_gateway.dto.UserDto;
 import com.polovnev.api_gateway.entity.UserEntity;
-import com.polovnev.api_gateway.service.NotificationService;
+import com.polovnev.api_gateway.service.EmailSenderService;
 import com.polovnev.api_gateway.service.UserService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,16 +22,16 @@ public class RegistrationFacade {
     private UserConverter userConverter;
 
     @Autowired
-    private NotificationService notificationService;
+    private EmailSenderService emailSenderService;
 
 
     @Transactional
-    public void registration(UserDto userDto) {
+    public void registration(UserDto userDto) throws MessagingException {
         UserEntity user = userConverter.userDtoToEntity(userDto);
         final String activationCode = generateActivationCode();
         user.setActivationCode(activationCode);
         userService.registration(user);
-        notificationService.sendEmail(user.getEmail(), activationCode);
+        emailSenderService.sendApproveAccountEmail(user.getEmail(), activationCode);
     }
 
     public void activateUser(String username, String activationCode) {

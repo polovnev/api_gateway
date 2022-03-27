@@ -2,6 +2,7 @@ package com.polovnev.api_gateway.controller;
 
 import com.polovnev.api_gateway.dto.UserDto;
 import com.polovnev.api_gateway.facade.RegistrationFacade;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class RegistrationController {
     private RegistrationFacade registrationFacade;
 
     @PostMapping("/registration")
-    public void registration(@RequestBody @Valid UserDto userDto){
+    public void registration(@RequestBody @Valid UserDto userDto) throws MessagingException {
         registrationFacade.registration(userDto);
     }
 

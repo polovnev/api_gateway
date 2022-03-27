@@ -17,7 +17,10 @@ public class ResponseController {
     private ResponseFacade responseFacade;
 
     @PostMapping
-    public void createResponse(@PathVariable Long questionId, @RequestBody ResponseDto responseDto) {
+    public void createResponse(@PathVariable Long questionId,
+                               @RequestBody ResponseDto responseDto,
+                               Principal principal) {
+        responseDto.setAuthorId(principal.getName());
         responseFacade.createResponse(questionId, responseDto);
     }
 

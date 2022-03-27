@@ -4,7 +4,10 @@ service:
   url:
     location: http://localhost:8000
     question_response: http://localhost:8081
-
+notification:
+  email:
+    from: polovnevad@gmail.com
+    secret-code: ucobzselkypyzbft
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/user
